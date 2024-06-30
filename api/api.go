@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -15,20 +16,25 @@ type CoinBalanceRes struct {
 }
 
 type Error struct {
-	code    int
-	message string
+	Code    int
+	Message string
 }
 
 func writeError(w http.ResponseWriter, message string, code int) {
 	resp := Error{
-		code:    code,
-		message: message,
+		Code:    code,
+		Message: message,
 	}
 
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 
-	json.NewEncoder(w).Encode(resp)
+	err := json.NewEncoder(w).Encode(resp)
+
+	if err != nil {
+		fmt.Println("Error writing response:", err)
+		return
+	}
 }
 
 var (

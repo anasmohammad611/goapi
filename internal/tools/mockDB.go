@@ -25,7 +25,7 @@ var mockCoinDetails = map[string]CoinDetails{
 		Coins:    300,
 		UserName: "alex",
 	},
-	"john": {
+	"joh": {
 		Coins:    1200,
 		UserName: "john",
 	},
