@@ -28,7 +28,6 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(`Fetching coins`)
 	tokenDetails, flag := database.GetUserCoins(params.Username)
 	if flag == false {
 		log.Error(err)
@@ -36,6 +35,7 @@ func GetCoinBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println(`Fetching coins`)
 	response := api.CoinBalanceRes{
 		Balance: tokenDetails.Coins,
 		Code:    http.StatusOK,
